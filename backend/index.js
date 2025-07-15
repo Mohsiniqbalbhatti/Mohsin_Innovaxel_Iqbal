@@ -128,6 +128,29 @@ try {
 }
 })
 
+// get route to get stats with shortcode
+app.get("/shorten/stats/:id", async (req,res)=>{
+    try {
+        const shortCode  = req.params.id;
+        
+        const url = await Url.findOne({shortCode:shortCode});
+        if (!url) {
+            return  res.status(404).json({message:"Short URL not found"})
+        }
+        res.status(200).json({
+            id: url._id,
+            url: url.url,
+            shortCode : url.shortCode,
+            createdAt: url.createdAt,
+            updatedAt: url.updatedAt,
+            accessCount: url.accessCount
+        })
+    } catch (error) {
+        console.log("Error", error)
+        res.status(500).json({message:"Internal Server Error"})  
+    }
+})
+
 app.listen(PORT,()=>{
     console.log(`server running on http://localhost:${PORT}`)
 })
