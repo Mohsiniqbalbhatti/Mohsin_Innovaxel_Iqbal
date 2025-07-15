@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend service for the URL shortner",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohsiniqbalbhatti/Mohsin_Innovaxel_Iqbal.git"
+  },
+  "author": "mohsin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohsiniqbalbhatti/Mohsin_Innovaxel_Iqbal/issues"
+  },
+  "homepage": "https://github.com/Mohsiniqbalbhatti/Mohsin_Innovaxel_Iqbal#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
