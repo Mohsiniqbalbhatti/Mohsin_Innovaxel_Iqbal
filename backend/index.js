@@ -76,6 +76,36 @@ app.get("/shorten/:id", async (req,res)=>{
     }
 })
 
+// Update an existing short URL using the PUT method
+app.put("/shorten/:id",async(req,res)=>{
+try {
+    const shortCode = req.params.id;
+    const {url} = req.body;
+    if (!shortCode || !url) {
+        return res.status(400).json({message:"ShortCode and te url is required"})
+    }
+    const existingUrl = await Url.findOne({
+        shortCode: shortCode
+    })
+    if (!existingUrl) {
+        return res.status(404).json({message:"URL not found for this short Code"})
+    }
+
+    const updatedUrl = await Url.findByIdAndUpdate(existingUrl._id, {url: url, updatedAt: Date.now()}, { new: true})
+    res.status(200).json({
+            id: updatedUrl._id,
+            url: updatedUrl.url,
+            shortCode : updatedUrl.shortCode,
+            createdAt: updatedUrl.createdAt,
+            updatedAt: updatedUrl.updatedAt,
+    })
+    
+} catch (error) {
+    console.log("Error", error)
+      res.status(500).json({message:"Internal Server Error"})
+}
+})
+
 app.listen(PORT,()=>{
     console.log(`server running on http://localhost:${PORT}`)
 })
