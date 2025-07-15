@@ -9,7 +9,7 @@ function App() {
       method: "post",
     },
     update: {
-      label: "Enter URL to update",
+      label: "Enter new URL to update previous",
       placeholder: "https://example.com/update/long/path",
       endpoint: "/shorten",
       method: "put",

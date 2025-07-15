@@ -5,6 +5,10 @@ import { configDotenv } from "dotenv";
 configDotenv()
 import ConnectDB from "./connectDB.js";
 ConnectDB() // connect to database
+import cors from "cors"
+app.use(cors({
+    origin:"*"
+}))
 import uniqueSlug from "unique-slug";
 import Url from "./urlSchema.js";
 
