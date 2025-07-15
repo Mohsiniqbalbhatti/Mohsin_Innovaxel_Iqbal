@@ -106,6 +106,28 @@ try {
 }
 })
 
+// Delete an existing short URL using the DELETE method
+app.delete("/shorten/:id",async(req,res)=>{
+try {
+    const shortCode = req.params.id;
+    if (!shortCode) {
+        return res.status(400).json({message:"ShortCode is required"})
+    }
+    const existingUrl = await Url.findOne({
+        shortCode: shortCode
+    })
+    if (!existingUrl) {
+        return res.status(404).json({message:"URL not found for this short Code"})
+    }
+    await Url.findByIdAndDelete(existingUrl._id)
+    res.status(204).json()
+    
+} catch (error) {
+    console.log("Error", error)
+      res.status(500).json({message:"Internal Server Error"})
+}
+})
+
 app.listen(PORT,()=>{
     console.log(`server running on http://localhost:${PORT}`)
 })
